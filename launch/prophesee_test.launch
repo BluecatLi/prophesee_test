@@ -1,0 +1,11 @@
+<launch>
+
+  <node pkg="prophesee_test" type="prophesee_publisher" name="prophesee_publisher" respawn="false" output="screen">
+    <param name="camera_name" value="camera" />
+    <param name="publish_iv" value="true" />
+    <!-- Instead of live camera, you can read data offline from raw file -->
+    <param name="raw_file_to_read" value="/home/yufan/Documents/translation_x_simple.raw" />
+
+  </node>
+
+</launch>
