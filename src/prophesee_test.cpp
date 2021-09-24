@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
 
 	Metavision::Camera cam;
 	// cam = Metavision::Camera::from_file("/home/yufan/Documents/Prophesee/x_1.raw");
-	cam = Metavision::Camera::from_file("/home/yufan/Documents/Prophesee/x_1.raw");
+	cam = Metavision::Camera::from_file("/home/yufan/Documents/Prophesee/x_2.raw");
 
 	std::cout << "Kitty on your lap!" << std::endl;
 
@@ -106,17 +106,15 @@ int main(int argc, char** argv) {
 	cam.start();
 
 	cv::Mat cd_frame,cdshow;
-	const int threshold = 10000;//please set appropriate value
+	const int threshold = 8000;//please set appropriate value
 	const int fps=25;
 
-	const int wait_time = 10;//ms
+	const int wait_time = 5;//ms
 	while (cam.is_running()) {
 		// display the frame if it's not empty
 		if (!ig.frame_.empty()) {
-			// ig.frame_.copyTo(cd_frame);
-			// cd_frame.convertTo(cdshow,CV_8UC1, 5.0, 128.0);
-			// cv::imshow(window_name, cdshow);
-			cv::Mat frame_Part = ig.frame_(cv::Range(160, 460),cv::Range(160,430));
+			// cv::Mat frame_Part = ig.frame_(cv::Range(160, 460),cv::Range(180,400));
+			cv::Mat frame_Part = ig.frame_(cv::Range(140, 460),cv::Range(180,490));
 			// cv::Scalar eventsum = cv::sum(cv::abs(ig.frame_));
 			cv::Scalar eventsum = cv::sum(cv::abs(frame_Part));
             if(eventsum(0) > threshold){
@@ -130,9 +128,9 @@ int main(int argc, char** argv) {
 		}
 
 		// if the user presses the `q` key, quit the loop
-		if ((cv::waitKey(wait_time) & 0xff) == 'q') {
-			break;
-		}
+		// if ((cv::waitKey(wait_time) & 0xff) == 'q') {
+		// 	break;
+		// }
 	}
 
 	
